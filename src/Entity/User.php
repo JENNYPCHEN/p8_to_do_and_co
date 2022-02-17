@@ -3,15 +3,18 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
+
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
-#[UniqueEntity("email","username")]
+#[UniqueEntity(fields: ["email","username"],message: 'Il existe déjà un compte avec ce nom d\'utilisateur et cette adresse e-mail.')]
 
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -25,10 +28,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $username;
 
     #[ORM\Column(type: 'json')]
+    #[Assert\NotBlank( message: 'Vous devez choisir un rôle.')]
     private $roles = [];
 
     #[ORM\Column(type: 'string', length: 64)]
     private $password;
+
+    #[Assert\NotBlank( message: 'Vous devez saisir un mot de passe.')]
+    private $plainPassword;
 
     #[ORM\Column(type: 'string', length: 60, unique: true)]
     #[Assert\NotBlank( message: 'Vous devez saisir une adresse email.')]
@@ -37,6 +44,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: 'json')]
     private $role = [];
+
+    #[ORM\OneToMany(mappedBy: 'author', targetEntity: Task::class)]
+    private $tasks;
+
+    public function __construct()
+    {
+        $this->tasks = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -128,6 +143,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setRole(array $role): self
     {
         $this->role = $role;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Task[]
+     */
+    public function getTasks(): Collection
+    {
+        return $this->tasks;
+    }
+
+    public function addTask(Task $task): self
+    {
+        if (!$this->tasks->contains($task)) {
+            $this->tasks[] = $task;
+            $task->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTask(Task $task): self
+    {
+        if ($this->tasks->removeElement($task)) {
+            // set the owning side to null (unless already changed)
+            if ($task->getAuthor() === $this) {
+                $task->setAuthor(null);
+            }
+        }
 
         return $this;
     }
