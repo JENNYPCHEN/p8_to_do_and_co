@@ -1,0 +1,15 @@
+
+{% block body %}
+
+    <form action="{{ path('login') }}" method="post">
+        <label for="username">Nom d'utilisateur:</label>
+        <input type="text" id="username" name="_username" {% if last_username is defined %}value="{{ last_username }}" {% endif %}/>
+
+        <label for="password">Mot de passe:</label>
+        <input type="password" id="password" name="_password"/>
+
+        <input type="hidden" name="_target_path" value="/dashboard"/> 
+
+        <button class="btn btn-sm btn-success" type="submit">Se connecter</button>
+    </form> 
+{% endblock %}

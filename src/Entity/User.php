@@ -29,21 +29,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: 'json')]
     #[Assert\NotBlank( message: 'Vous devez choisir un rôle.')]
-    private $roles = [];
+    private $roles = ['ROLE_USER'];
 
     #[ORM\Column(type: 'string', length: 64)]
     private $password;
 
-    #[Assert\NotBlank( message: 'Vous devez saisir un mot de passe.')]
     private $plainPassword;
 
     #[ORM\Column(type: 'string', length: 60, unique: true)]
     #[Assert\NotBlank( message: 'Vous devez saisir une adresse email.')]
     #[Assert\Email( message: 'Le format de l\'adresse n\'est pas correcte.')]
     private $email;
-
-    #[ORM\Column(type: 'json')]
-    private $role = [];
 
     #[ORM\OneToMany(mappedBy: 'author', targetEntity: Task::class)]
     private $tasks;
@@ -131,18 +127,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setEmail(string $email): self
     {
         $this->email = $email;
-
-        return $this;
-    }
-
-    public function getRole(): ?array
-    {
-        return $this->role;
-    }
-
-    public function setRole(array $role): self
-    {
-        $this->role = $role;
 
         return $this;
     }

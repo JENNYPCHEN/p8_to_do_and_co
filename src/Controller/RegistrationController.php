@@ -1,5 +1,5 @@
 <?php
-
+//can be deleted at the end 
 namespace App\Controller;
 
 use App\Entity\User;
