@@ -15,4 +15,11 @@ class DefaultController extends AbstractController
             'controller_name' => 'DefaultController',
         ]);
     }
+    #[Route('/dashboard', name:'dashboard')]
+    public function dashboard(): Response
+    {
+        return $this->render('default/index.html.twig', [
+            'controller_name' => 'DefaultController',
+        ]);
+    }
 }

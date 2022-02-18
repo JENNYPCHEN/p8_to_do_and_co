@@ -10,17 +10,18 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Service\UserService;
+use App\Form\UserType;
 
 
 class UserController extends AbstractController
 {
-    private $userRepository;
-    private $userService;
+    protected $userRepository;
+    protected $UserService;
 
-    public function __contruct(UserRepository $userRepository, EntityManager $entityManager, UserService $userService)
+    public function __construct(UserRepository $userRepository, UserService $UserService)
     {
         $this->userRepository = $userRepository;
-        $this->userService = $userService;
+        $this->UserService = $UserService;
     }
 
     #[Route('/users', name: 'user_list')]
@@ -38,22 +39,22 @@ class UserController extends AbstractController
     public function createAction(Request $request): Response
     {
         $user = new User();
-        $form = $this->createForm(UserType::class, $user);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $this->userService->saveUser($form, $user);
+        $userForm = $this->createForm(UserType::class, $user);
+        $userForm->handleRequest($request);
+        if ($userForm->isSubmitted() && $userForm->isValid()) {
+            $this->UserService->saveUser($userForm, $user);
             $this->addFlash('success', "L'utilisateur a bien été ajouté.");
             return $this->redirectToRoute('user_list');
         }
         return $this->render('user/create.html.twig', [
-            'form' => '$form->createView()',
+            'userForm' => $userForm->createView(),
         ]);
     }
 
     #[Route('/users/{id}/edit', name: 'user_edit')]
     public function editAction(User $user, Request $request)
     {
-        $form = $this->createForm(UserType::class, $user);
+        $form = $this->createForm(UserType::class , $user);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $this->userService->saveUser($form,$user);
