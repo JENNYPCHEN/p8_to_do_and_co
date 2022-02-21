@@ -3,7 +3,12 @@
 {% block body %}
 
   {% if error is defined %}
-      <div class="alert alert-danger" role="alert">Veuillez vérifier votre nom d'utilisateur/mot de passe.</div>
-    {% endif %}
+  <div class="alert alert-danger" role="alert">Veuillez vérifier votre nom d'utilisateur/mot de passe.</div>
+  {% endif %}
+  {% if not app.user %}
 {% include 'login/login.html.twig' %}
+ {% endif %}
+   {% if app.user %}
+{% include 'default/dashboard.html.twig' %}
+ {% endif %}
 {% endblock %}

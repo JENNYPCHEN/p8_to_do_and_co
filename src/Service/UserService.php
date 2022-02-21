@@ -30,7 +30,5 @@ class UserService
         $this->entityManager->flush();
      
     }
-    public function hello(){
-        echo "hello";
-    }
+
 }

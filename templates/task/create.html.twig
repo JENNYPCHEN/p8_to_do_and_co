@@ -1,20 +1,19 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello TaskController!{% endblock %}
-
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <div class="row">
+        {{ form_start(form, {'action' : path('task_create')}) }}
+             {{ form_label(form.title) }}
+       {{ form_widget(form.title,{'attr':{'class':'form-control'}}) }}
+          {{ form_label(form.content) }}
+       {{ form_widget(form.content,{'attr':{'class':'form-control'}}) }}
+       <div class ="row">
+       <div class="d-flex justify-content-between my-1">
+        <button type="submit" class="btn btn-success ">Ajouter</button>
+        {{ form_end(form) }}
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/laragon/www/p8_to_do_and_co/src/Controller/TaskController.php'|file_link(0) }}">src/Controller/TaskController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/laragon/www/p8_to_do_and_co/templates/task/index.html.twig'|file_link(0) }}">templates/task/index.html.twig</a></code></li>
-    </ul>
-</div>
+        <a href="{{ path('task_list') }}" class="btn btn-primary">Retour à la liste des tâches</a>
+        </div>
+        </div>
+    </div>
 {% endblock %}
