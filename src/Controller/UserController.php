@@ -4,7 +4,6 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Repository\UserRepository;
-use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,7 +30,7 @@ class UserController extends AbstractController
 
         return $this->render('user/list.html.twig', [
             'controller_name' => 'UserController',
-            'users' => '$user_list'
+            'users' => $user_list
         ]);
     }
 
@@ -57,12 +56,12 @@ class UserController extends AbstractController
         $form = $this->createForm(UserType::class , $user);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->userService->saveUser($form,$user);
+            $this->UserService->saveUser($form,$user);
             $this->addFlash('success', "L'utilisateur a bien été modifié");
             return $this->redirectToRoute('user_list');
         }
         return $this->render('user/edit.html.twig', [
-            'form' => '$form->createView()', 
+            'userForm' => $form->createView(), 
             'user' => $user]);
     }
 }

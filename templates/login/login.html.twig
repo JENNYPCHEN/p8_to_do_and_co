@@ -3,12 +3,13 @@
 
     <form action="{{ path('login') }}" method="post">
         <label for="username">Nom d'utilisateur:</label>
-        <input type="text" id="username" name="_username" {% if last_username is defined %}value="{{ last_username }}" {% endif %}/>
+        <input type="text" id="username" name="_username" {% if last_username is defined %}value="{{ last_username }}" {% endif %} requied/>
 
-        <label for="password">Mot de passe:</label>
-        <input type="password" id="password" name="_password"/>
+        <label for="inputPassword">Mot de passe:</label>
+        <input type="password" id="password" name="_password" required/>
 
         <input type="hidden" name="_target_path" value="/dashboard"/> 
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
         <button class="btn btn-sm btn-success" type="submit">Se connecter</button>
     </form> 
