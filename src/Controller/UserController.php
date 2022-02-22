@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Service\UserService;
 use App\Form\UserType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 
 class UserController extends AbstractController
@@ -22,11 +23,14 @@ class UserController extends AbstractController
         $this->userRepository = $userRepository;
         $this->UserService = $UserService;
     }
-
     #[Route('/users', name: 'user_list')]
+    #[IsGranted('ROLE_USER')]
     public function listAction(): Response
     {
-        $user_list=$this->userRepository->findAll();
+        if ($this->isGranted('ROLE_ADMIN')) {
+            $user_list=$this->userRepository->findAll();
+           }
+            $user_list=$this->userRepository->findOneBy(['username'=>$this->getUser()->getUserIdentifier()]);
 
         return $this->render('user/list.html.twig', [
             'controller_name' => 'UserController',
@@ -51,8 +55,15 @@ class UserController extends AbstractController
     }
 
     #[Route('/users/{id}/edit', name: 'user_edit')]
+    #[IsGranted('ROLE_USER')]
     public function editAction(User $user, Request $request)
     {
+        if ($user!==$this->isGranted('ROLE_ADMIN')) {
+            if ($user!==$this->getUser()){
+        $this->addFlash('error', "Désolé. Vous n'avez pas le droit d'y accéder.");
+        return $this->redirectToRoute('homepage');
+            }
+        }
         $form = $this->createForm(UserType::class , $user);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {

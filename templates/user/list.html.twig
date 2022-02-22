@@ -30,7 +30,18 @@
                             <a href="{{ path('user_edit', {'id' : user.id}) }}" class="btn btn-success btn-sm">Modifier</a>
                         </td>
                     </tr>
+               
+                          {% else %}
+                    <tr>
+                        <th scope="row">{{ loop.index }}</th>
+                        <td>{{ users.username }}</td>
+                        <td>{{ users.email }}</td>
+                        <td>
+                            <a href="{{ path('user_edit', {'id' : users.id}) }}" class="btn btn-success btn-sm">Modifier</a>
+                        </td>
+                    </tr>
                 {% endfor %}
+
                 </tbody>
             </table>
         </div>
