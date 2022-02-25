@@ -24,14 +24,15 @@ class UserController extends AbstractController
         $this->UserService = $UserService;
     }
     #[Route('/users', name: 'user_list')]
-    #[IsGranted('ROLE_USER')]
+    #[IsGranted("ROLE_USER")]
     public function listAction(): Response
-    {
-        if ($this->isGranted('ROLE_ADMIN')) {
-            $user_list=$this->userRepository->findAll();
-           }
-            $user_list=$this->userRepository->findOneBy(['username'=>$this->getUser()->getUserIdentifier()]);
-
+    {  
+       $current_user=$this->getUser()->getRoles();
+       $user_list=$this->userRepository->findOneBy(['username'=>$this->getUser()->getUserIdentifier()]);
+       if ($current_user=== ['ROLE_ADMIN']){
+        $user_list=$this->userRepository->findAll();
+    } 
+    
         return $this->render('user/list.html.twig', [
             'controller_name' => 'UserController',
             'users' => $user_list
@@ -58,8 +59,9 @@ class UserController extends AbstractController
     #[IsGranted('ROLE_USER')]
     public function editAction(User $user, Request $request)
     {
-        if ($user!==$this->isGranted('ROLE_ADMIN')) {
-            if ($user!==$this->getUser()){
+        $current_user=$this->getUser();
+        if ($current_user->getRoles()!==['ROLE_ADMIN']) {
+            if ($user!==$current_user){
         $this->addFlash('error', "Désolé. Vous n'avez pas le droit d'y accéder.");
         return $this->redirectToRoute('homepage');
             }
