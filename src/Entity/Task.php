@@ -32,7 +32,7 @@ class Task
     private $isDone=0;
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'tasks')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: true)]
     private $author;
 
     public function getId(): ?int
@@ -105,7 +105,7 @@ class Task
     }
 
     public function getAuthor(): ?User
-    {
+    { 
         return $this->author;
     }
 
@@ -115,4 +115,5 @@ class Task
 
         return $this;
     }
+  
 }

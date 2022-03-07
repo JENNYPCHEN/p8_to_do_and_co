@@ -2,12 +2,21 @@
 
 namespace App\Security\Voter;
 
+use App\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\Security;
 
 class TaskVoter extends Voter
 {
+    private $security;
+
+    public function __construct(Security $security)
+    {
+        $this->security = $security;
+    }
+
     protected function supports(string $attribute, $subject): bool
     {
         // replace with your own logic
@@ -27,23 +36,19 @@ class TaskVoter extends Voter
         // ... (check conditions and return true to grant permission) ...
         switch ($attribute) {
             case 'TASK_EDIT':
-                if($user===$subject->getAuthor()){
+              if($user===$subject->getAuthor()){
                     return true;
                 }
-                break;
-                if($subject->getAuthor->get->getUserIdentifier()==='anonyme' && $this->security->isGranted()=='ROLE_ADMIN'){
+               if($subject->getAuthor()==null && $this->security->isGranted('ROLE_ADMIN')){
                     return true;
                 }
-                break;
             case 'TASK_DELETE':
                 if($user===$subject->getAuthor()){
                     return true;
                 }
-                break;
-                if($subject->getAuthor->get->getUserIdentifier()==='anonyme' && $this->security->isGranted()=='ROLE_ADMIN'){
+                if($subject->getAuthor()===null && $this->security->isGranted('ROLE_ADMIN')){
                     return true;
                 }
-                break;
         }
 
         return false;
