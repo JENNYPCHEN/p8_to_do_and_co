@@ -9,31 +9,33 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 
 class UserControllerTest extends WebTestCase {
+
     protected $client;
+   
 	
 	public function setUp(): void
 	{
 		parent::setUp();
 		$this->client = static::createClient();
-        $this->cleanUpUser();
+      // $this->cleanUpUser();
 	}
 
     public function test_role_user_read_users(){
-       $this->loginUser($this->client,'user');
+     $this->loginAUser($this->client,'user');
         $crawler=$this->client->request('GET', '/users'); 
         $this->assertResponseIsSuccessful();
-        $this->assertMatchesRegularExpression('/user@user.com/', $this->client->getResponse()->getContent());
+        $this->assertMatchesRegularExpression('/user/', $this->client->getResponse()->getContent());
         $this->assertSelectorExists('th:contains("1")');
         $this->assertSelectorNotExists('th:contains("2")');
 
     }
 
     public function test_role_admin_read_users(){
-        $this->loginUser($this->client,'admin');
+        $this->loginAUser($this->client,'admin');
         $crawler=$this->client->request('GET', '/users'); 
         $this->assertResponseIsSuccessful();
-        $this->assertMatchesRegularExpression('/admin@admin.com/', $this->client->getResponse()->getContent());
-        $this->assertMatchesRegularExpression('/user@user.com/', $this->client->getResponse()->getContent());
+        $this->assertMatchesRegularExpression('/admin/', $this->client->getResponse()->getContent());
+        $this->assertMatchesRegularExpression('/user/', $this->client->getResponse()->getContent());
 
     }
     
@@ -54,13 +56,12 @@ class UserControllerTest extends WebTestCase {
         ]);
         $this->client->submit($form);
         $this->assertResponseRedirects('/users');
-        $this->assertCount(1,[$crawler->filter('.success')->count()]);
     }
     public function test_create_user_two_different_passwords(){
         $crawler = $this->client->request('POST', '/users/create');
         $form = $crawler->selectButton('Ajouter')->form([
             'user[username]' => 'test',
-            'user[email]' => 'test@test.com',
+            'user[email]' => 'add@test.com',
             'user[plainPassword][first]' => '12345678',
             'user[plainPassword][second]' => '87654321',
             'user[roles]' => "ROLE_ADMIN",
@@ -69,41 +70,53 @@ class UserControllerTest extends WebTestCase {
         $this->assertSelectorExists('li:contains("Les deux mots de passe doivent correspondre.")');
     }
     public function test_role_user_access_edit_other_accounts(){
-        $this->loginUser($this->client,'user');
-        $crawler = $this->client->request('GET', '/users/2/edit');
+      
+        $this->loginAUser($this->client,'user');
+        $userId=$this->findUserId($this->client,'admin');
+        $crawler = $this->client->request('GET', '/users/'.$userId.'/edit');
         $this->assertResponseRedirects('/');
-        $this->assertCount(1,[$crawler->filter('.alarm')->count()]);
+        $this->client->followRedirect();
+		$this->assertSelectorTextContains('.alert-danger', "Désolé. Vous n'avez pas le droit d'y accéder.");
     }
 
     public function test_role_admin_access_edit_other_accounts(){
-        $this->loginUser($this->client,'admin');
-        $crawler = $this->client->request('GET', '/users/3/edit');
+        $this->loginAUser($this->client,'admin');
+        $userId=$this->findUserId($this->client,'user');
+        $crawler = $this->client->request('GET', '/users/'.$userId.'/edit');
         $this->assertSelectorExists('h1:contains("Modifier")');
     }
 
     public function test_visiter_access_edit_user_page(){
-        $crawler = $this->client->request('GET', '/users/3/edit');
+        $userId=$this->findUserId($this->client,'user');
+        $crawler = $this->client->request('GET', '/users/'.$userId.'/edit');
         $this->assertResponseRedirects( 'http://localhost/login');
         
     }
     public function test_edit_user_successfully(){
-        $this->loginUser($this->client, 'admin');
-        $crawler = $this->client->request('POST', '/users/3/edit');
+        $this->loginAUser($this->client, 'admin');
+        $userId=$this->findUserId($this->client,'user');
+        $crawler = $this->client->request('GET', '/users/'.$userId.'/edit');
         $form = $crawler->selectButton('Sauvegarder')->form([
-            'user[email]' => 'test@test.com',
+            'user[email]' => 'edit@edit.com',
             'user[plainPassword][first]' => '12345678',
             'user[plainPassword][second]' => '12345678',
         ]);
         $this->client->submit($form);
         $this->assertResponseRedirects('/users');
-        $this->assertCount(1,[$crawler->filter('.success')->count()]);
-
+        $this->client->followRedirect();
+        $this->assertSelectorTextContains('.alert-success', "Superbe ! L'utilisateur a bien été modifié");        
 
     }
-    private function loginUser($client,$username){
+    private function loginAUser($client,$username){
         $userRepository = static::getContainer()->get(UserRepository::class);
         $testUser = $userRepository->findOneBy(['username'=> $username]);
         $client->loginUser($testUser);
+    }
+    private function findUserId($client,$username){
+        $userRepository = static::getContainer()->get(UserRepository::class);
+        $userId = $userRepository->findOneBy(['username'=> $username])->getId();
+        return $userId;
+
     }
     private function cleanUpUser(){
         $userRepository = static::getContainer()->get(UserRepository::class);

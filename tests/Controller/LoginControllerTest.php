@@ -21,6 +21,7 @@ class LoginControllerTest extends WebTestCase
      $crawler = $this->client->request('GET', '/login');
      $this->fill_form($crawler,$this->client,'user','wrongpassword');
         $this->assertResponseRedirects('http://localhost/login');
+        $this->client->followRedirect();
         $this->assertCount(1,[$crawler->filter('.alert.alert-danger')->count()]);
     }
    
@@ -29,6 +30,7 @@ class LoginControllerTest extends WebTestCase
         $crawler = $this->client->request('GET', '/login');
         $this->fill_form($crawler,$this->client,'wrongusername','12345678');
             $this->assertResponseRedirects('http://localhost/login');
+            $this->client->followRedirect();
             $this->assertCount(1,[$crawler->filter('.alert.alert-danger')->count()]);
         }
 
@@ -37,6 +39,7 @@ class LoginControllerTest extends WebTestCase
             $crawler = $this->client->request('GET', '/login');
             $this->fill_form($crawler,$this->client,'user','12345678');
                 $this->assertResponseRedirects('http://localhost/');
+                $this->client->followRedirect();
                 $this->assertSelectorNotExists('.alert.alert-danger');
         }
 

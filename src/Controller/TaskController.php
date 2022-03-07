@@ -47,7 +47,7 @@ class TaskController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $this->taskService->saveTask($task);
-            $this->addFlash('success', 'La tâche a été bien été ajoutée.');
+            $this->addFlash('success', 'La tâche a été bien ajoutée.');
             return $this->redirectToRoute('task_list');
         }
         return $this->render('task/create.html.twig', ['form' => $form->createView()]);
