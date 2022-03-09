@@ -8,6 +8,9 @@ use Doctrine\Persistence\ObjectManager;
 use App\Repository\UserRepository;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 
+/**
+ * @codeCoverageIgnore
+ */
 class TaskFixtures extends Fixture implements DependentFixtureInterface
 {
     private $userRepository;

@@ -19,7 +19,7 @@ class TaskController extends AbstractController
     private $taskService;
     public function __construct(TaskRepository $taskRepository, TaskService $taskService)
     {
-        $task_list=$this->taskRepository = $taskRepository;
+        $this->taskRepository = $taskRepository;
         $taskService=$this->taskService = $taskService;
 
     }
