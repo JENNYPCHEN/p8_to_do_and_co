@@ -18,12 +18,12 @@ class UserService
         $this->userPasswordHasher = $userPasswordHasher;
         $this->entityManager = $entityManager;
     }
-    public function saveUser($form, $user)
+    public function saveUser($plainpassword, $user)
     {
         $user->setPassword(
             $this->userPasswordHasher->hashPassword(
                 $user,
-                $form->get('plainPassword')->getData()
+                $plainpassword
             )
         );
         $this->entityManager->persist($user);
