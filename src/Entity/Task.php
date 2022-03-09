@@ -106,14 +106,19 @@ class Task
 
     public function getAuthor(): ?User
     { 
-        return $this->author;
+            return $this->author;
     }
+ 
 
     public function setAuthor(?User $author): self
     {
         $this->author = $author;
 
         return $this;
+    }
+    public function getAuthorName(){
+        $this->getAuthor()!==null?$authorName=$this->getAuthor()->getUserIdentifier():$authorName='anoyme';
+        return $authorName;
     }
   
 }
