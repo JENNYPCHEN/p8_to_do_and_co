@@ -5,7 +5,7 @@ namespace App\Tests\Controller;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use App\Repository\UserRepository;
 
-final class DefaultControllerTest extends WebTestCase
+final class HomepageControllerTest extends WebTestCase
 {
 	protected $client;
 	
@@ -15,11 +15,11 @@ final class DefaultControllerTest extends WebTestCase
 		$this->client = static::createClient();
     
 	}
-    public function test_visiter_homepage(){
+    public function testVisiterHomepage(){
         $this->client->request('GET', '/'); 
         $this->assertSelectorTextContains('button', 'Se connecter');
     }
-    public function test_logged_in_user_homepage(){
+    public function testLoggedInUserHomepage(){
         $userRepository = static::getContainer()->get(UserRepository::class);
         $testUser = $userRepository->findOneBy(['username'=> 'user']);
         $this->client->loginUser($testUser);

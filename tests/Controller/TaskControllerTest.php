@@ -19,32 +19,32 @@ class TaskControllerTest extends WebTestCase
     
 	}
     
-    public function test_role_users_read_tasks()
+    public function testRoleUsersReadTasks()
     {
-        $this->loginAUser($this->client, 'user');
-        $crawler=$this->client->request('GET', '/tasks'); 
+        $this->loginAUser('user');
+        $this->client->request('GET', '/tasks'); 
         $this->assertResponseIsSuccessful();
         $this->assertSelectorExists('a:contains("Créer une tâche")');
 
     }
-    public function test_role_admin_read_tasks()
+    public function testRoleAdminReadTasks()
     {
-        $this->loginAUser($this->client, 'admin');
-        $crawler=$this->client->request('GET', '/tasks'); 
+        $this->loginAUser('admin');
+        $this->client->request('GET', '/tasks'); 
         $this->assertResponseIsSuccessful();
         $this->assertSelectorExists('a:contains("Créer une tâche")');
     }
 
-    public function test_visiter_read_tasks()
+    public function testVisiterReadTasks()
     {
-        $crawler=$this->client->request('GET', '/tasks'); 
+        $this->client->request('GET', '/tasks'); 
         $this->assertResponseRedirects('http://localhost/login');
         $this->client->followRedirect();
         $this->assertSelectorTextContains('.alert-danger', "Veuillez vérifier votre nom d'utilisateur/mot de passe.");
     }
-    public function test_create_task_successfully()
+    public function testCreateTaskSuccessfully()
     {
-        $currentUser=$this->loginAUser($this->client, 'user');
+        $this->loginAUser('user');
         $crawler = $this->client->request('POST', '/tasks/create');
         $form = $crawler->selectButton('Ajouter')->form([
             'task[title]' => 'test',
@@ -55,9 +55,9 @@ class TaskControllerTest extends WebTestCase
         $this->client->followRedirect();
         $this->assertSelectorTextContains('.alert-success', "Superbe ! La tâche a été bien ajoutée.");
     }
-    public function test_task_owner_edit_task()
+    public function testTaskOwnerEditTask()
     {
-        $currentUser=$this->loginAUser($this->client, 'user');
+        $this->loginAUser('user');
         $taskId=$this->findTaskId('user');
         $crawler = $this->client->request('POST','/tasks/'.$taskId.'/edit');
         $form = $crawler->selectButton('Modifier')->form([
@@ -69,19 +69,19 @@ class TaskControllerTest extends WebTestCase
             $this->client->followRedirect();
             $this->assertSelectorTextContains('.alert-success', "Superbe ! La tâche a bien été modifiée.");
     }
-    public function test_non_task_owner_edit_task()
+    public function testNonTaskOwnerEditTask()
     {
-        $currentUser=$this->loginAUser($this->client, 'admin');
+        $this->loginAUser('admin');
         $taskId=$this->findTaskId('user');
-        $crawler = $this->client->request('POST','/tasks/'.$taskId.'/edit');
+        $this->client->request('POST','/tasks/'.$taskId.'/edit');
         $this->assertResponseRedirects('/tasks');
         $this->client->followRedirect();
         $this->assertSelectorTextContains('.alert', "Oops ! Désolé. Vous n'avez pas le droit d'y accéder.");   
            
     }
-    public function test_role_admin_edit_anoyme_task()
+    public function testRoleAdminEditAnoymeTask()
     {
-        $currentUser=$this->loginAUser($this->client, 'admin');
+        $this->loginAUser('admin');
         $taskId=$this->findTaskId(NULL);
         $crawler = $this->client->request('POST','/tasks/'.$taskId.'/edit');
         $form = $crawler->selectButton('Modifier')->form([
@@ -95,12 +95,12 @@ class TaskControllerTest extends WebTestCase
 
 
     }
-    public function test_task_owner_edit_toggle()
+    public function testTaskOwnerEditToggle()
     {
-        $currentUser=$this->loginAUser($this->client, 'user');
+        $this->loginAUser('user');
         $taskId=$this->findTaskId('user');
         $task=$this->findTask($taskId);
-        $crawler = $this->client->request('POST','/tasks/'.$taskId.'/toggle');
+        $this->client->request('POST','/tasks/'.$taskId.'/toggle');
         $this->assertResponseRedirects('/tasks');
         $this->client->followRedirect();
         if($task->getIsDone()==1){
@@ -110,23 +110,23 @@ class TaskControllerTest extends WebTestCase
             $this->assertSelectorTextContains('.alert-success', "a bien été marquée comme pas encore faite");
             }
     }
-    public function test_non_task_owner_edit_toggle()
+    public function testNonTaskOwnerEditToggle()
     {
-        $currentUser=$this->loginAUser($this->client, 'user');
+        $this->loginAUser('user');
         $taskId=$this->findTaskId('admin');
-        $task=$this->findTask($taskId);
-        $crawler = $this->client->request('POST','/tasks/'.$taskId.'/toggle');
+        $this->findTask($taskId);
+        $this->client->request('POST','/tasks/'.$taskId.'/toggle');
         $this->assertResponseRedirects('/tasks');
         $this->client->followRedirect();
         $this->assertSelectorTextContains('.alert', "Désolé. Vous n'avez pas le droit d'y accéder.");
 
     }
-    public function test_role_admin_edit_anoyme_toggle()
+    public function testRoleAdminEditAnoymeToggle()
     {
-        $currentUser=$this->loginAUser($this->client, 'admin');
+        $this->loginAUser('admin');
         $taskId=$this->findTaskId(NULL);
         $task=$this->findTask($taskId);
-        $crawler = $this->client->request('POST','/tasks/'.$taskId.'/toggle');
+        $this->client->request('POST','/tasks/'.$taskId.'/toggle');
         $this->assertResponseRedirects('/tasks');
         $this->client->followRedirect();
         if($task->getIsDone()==1){
@@ -136,38 +136,38 @@ class TaskControllerTest extends WebTestCase
             $this->assertSelectorTextContains('.alert-success', "a bien été marquée comme pas encore faite");
            }
     }
-    public function test_task_owner_delete_task()
+    public function testTaskOwnerDeleteTask()
     {
-        $currentUser=$this->loginAUser($this->client, 'user');
+        $this->loginAUser('user');
         $taskId=$this->findTaskId('user');
-        $crawler = $this->client->request('POST','/tasks/'.$taskId.'/delete');
+        $this->client->request('POST','/tasks/'.$taskId.'/delete');
         $this->assertResponseRedirects('/tasks');
         $this->client->followRedirect();
         $this->assertSelectorTextContains('.alert-success', "Superbe ! La tâche a bien été supprimée.");
     }
-    public function test_non_task_owner_delete_task()
+    public function testNonTaskOwnerDeleteTask()
     {
-        $currentUser=$this->loginAUser($this->client, 'admin');
+        $this->loginAUser( 'admin');
         $taskId=$this->findTaskId('user');
-        $crawler = $this->client->request('POST','/tasks/'.$taskId.'/delete');
+        $this->client->request('POST','/tasks/'.$taskId.'/delete');
         $this->assertResponseRedirects('/tasks');
         $this->client->followRedirect();
         $this->assertSelectorTextContains('.alert', "Désolé. Vous n'avez pas le droit d'y accéder.");
 
     }
-    public function test_task_admin_delete_anoyme_task()
+    public function testTaskAdminDeleteAnoymeTask()
     {
-        $currentUser=$this->loginAUser($this->client, 'admin');
+        $this->loginAUser('admin');
         $taskId=$this->findTaskId(NULL);
-        $crawler = $this->client->request('POST','/tasks/'.$taskId.'/delete');
+        $this->client->request('POST','/tasks/'.$taskId.'/delete');
         $this->assertResponseRedirects('/tasks');
         $this->client->followRedirect();
         $this->assertSelectorTextContains('.alert-success', "Superbe ! La tâche a bien été supprimée.");
     }
-    private function loginAUser($client,$username){
+    private function loginAUser($username){
         $userRepository = static::getContainer()->get(UserRepository::class);
         $testUser = $userRepository->findOneBy(['username'=> $username]);
-        $client->loginUser($testUser);
+        $this->client->loginUser($testUser);
     }
     private function findTaskId($username){
         $userRepository = static::getContainer()->get(UserRepository::class);

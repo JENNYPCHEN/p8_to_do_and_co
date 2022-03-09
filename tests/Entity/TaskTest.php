@@ -10,7 +10,7 @@ use Symfony\Component\Validator\Validation;
 
 final class TaskTest extends TestCase {
 
-function test_create_task(){
+function testCreateTask(){
     $task=new Task;
     $task->setTitle('create a task title');
     $task->setContent('create a task content');
@@ -23,7 +23,7 @@ function test_create_task(){
     $this->assertEquals(0, $task->getIsDone());
     $this->assertEquals('anoyme', $task->getAuthorName());
 }
-function test_create_task_with_blank_title(){
+function testCreateTaskWithBlankTitle(){
     $task =new Task;
     $task->setTitle('');
     $task->setContent('test');
@@ -32,7 +32,7 @@ function test_create_task_with_blank_title(){
     $this->assertEquals( 1,count($violations));
     
 }
-function test_create_task_with_blank_content(){
+function testCreateTaskWithBlankContent(){
     $task =new Task;
     $task->setTitle('test');
     $task->setContent('');
@@ -41,13 +41,13 @@ function test_create_task_with_blank_content(){
     $this->assertEquals( 1,count($violations));
 
 }
-function test_set_toggle(){
+function testSetToggle(){
     $task=new Task;
     $task->toggle(1);
     $this->assertEquals(1,$task->getIsDone());
 }
 
-function test_get_authorname(){
+function testGetAuthorName(){
     $task=new Task;
     $user=new User;
     $user->setUsername('fakeUser');
