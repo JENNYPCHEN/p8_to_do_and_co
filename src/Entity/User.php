@@ -25,6 +25,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $id;
 
     #[ORM\Column(type: 'string', length: 25, unique: true)]
+    #[Assert\Length(min: 1, max: 25)]
     #[Assert\NotBlank( message: 'Vous devez saisir un nom d\'utilisateur.')]
     private $username;
 
@@ -33,6 +34,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $roles = ['ROLE_USER'];
 
     #[ORM\Column(type: 'string', length: 64)]
+    #[Assert\Length(min: 6, max: 64)]
     private $password;
 
     private $plainPassword;
@@ -159,9 +161,5 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         }
 
         return $this;
-    }
-    public function getAuthorName(Task $task){
-        $task->getAuthor()!==null?$authorName=$task->getAuthor()->getUserIdentifier():$authorName='anoyme';
-        return $authorName;
     }
 }
