@@ -48,7 +48,7 @@ class UserController extends AbstractController
         $userForm = $this->createForm(UserType::class, $user);
         $userForm->handleRequest($request);
         if ($userForm->isSubmitted() && $userForm->isValid()) {
-            $this->UserService->saveUser($userForm, $user);
+            $this->UserService->saveUser($userForm->get('plainPassword')->getData(), $user);
             $this->addFlash('success', "L'utilisateur a bien été ajouté.");
             return $this->redirectToRoute('user_list');
         }
@@ -71,7 +71,7 @@ class UserController extends AbstractController
         $form = $this->createForm(UserType::class , $user);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->UserService->saveUser($form,$user);
+            $this->UserService->saveUser($form->get('plainPassword')->getData(),$user);
             $this->addFlash('success', "L'utilisateur a bien été modifié");
             return $this->redirectToRoute('user_list');
         }

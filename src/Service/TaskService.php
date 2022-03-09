@@ -17,7 +17,7 @@ class TaskService
     }
     public function saveTask($task)
     {
-        $task->getId()!==null?$task->setUpdatedAt(new DateTime()):$task->setCreatedAt(new DateTime());
+       $task->getId()!==null?$task->setUpdatedAt(new DateTime()):$task->setCreatedAt(new DateTime());
         $this->entityManager->persist($task);
         $this->entityManager->flush();
     }
