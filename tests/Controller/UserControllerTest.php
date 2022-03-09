@@ -79,7 +79,7 @@ class UserControllerTest extends WebTestCase
     public function testRoleUserAccessEditOtherAccounts()
     {
         $this->loginAUser('user');
-        $userId = $this->findUserId($this->client, 'admin');
+        $userId = $this->findUserId('admin');
         $this->client->request('GET', '/users/' . $userId . '/edit');
         $this->assertResponseRedirects('/');
         $this->client->followRedirect();
@@ -89,21 +89,21 @@ class UserControllerTest extends WebTestCase
     public function testRoleAdminAccessEditOtherAccounts()
     {
         $this->loginAUser('admin');
-        $userId = $this->findUserId($this->client, 'user');
+        $userId = $this->findUserId('user');
         $this->client->request('GET', '/users/' . $userId . '/edit');
         $this->assertSelectorExists('h1:contains("Modifier")');
     }
 
     public function testVisiterAccessEditUserPage()
     {
-        $userId = $this->findUserId($this->client, 'user');
-        $crawler = $this->client->request('GET', '/users/' . $userId . '/edit');
+        $userId = $this->findUserId('user');
+        $this->client->request('GET', '/users/' . $userId . '/edit');
         $this->assertResponseRedirects('http://localhost/login');
     }
     public function testEditUserSuccessfully()
     {
         $this->loginAUser('admin');
-        $userId = $this->findUserId($this->client, 'user');
+        $userId = $this->findUserId('user');
         $crawler = $this->client->request('GET', '/users/' . $userId . '/edit');
         $form = $crawler->selectButton('Sauvegarder')->form([
             'user[email]' => 'edit@edit.com',
@@ -121,7 +121,7 @@ class UserControllerTest extends WebTestCase
         $testUser = $userRepository->findOneBy(['username' => $username]);
         $this->client->loginUser($testUser);
     }
-    private function findUserId($client, $username)
+    private function findUserId($username)
     {
         $userRepository = static::getContainer()->get(UserRepository::class);
         $userId = $userRepository->findOneBy(['username' => $username])->getId();
