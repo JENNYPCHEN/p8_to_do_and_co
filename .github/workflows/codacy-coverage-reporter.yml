@@ -16,4 +16,4 @@ jobs:
           project-token:  88333791c9ee4a0ca3877f0249b12f90
           # or
           # api-token: ${{ secrets.CODACY_API_TOKEN }}
-          coverage-reports: clover.xml
+          coverage-reports: clover.xml,cobertura.xml
