@@ -45,7 +45,7 @@ class UserControllerTest extends WebTestCase
 
     public function testVisiterReadUsers()
     {
-        $crawler = $this->client->request('GET', '/users');
+        $this->client->request('GET', '/users');
         $this->assertResponseRedirects('http://localhost/login');
     }
 
