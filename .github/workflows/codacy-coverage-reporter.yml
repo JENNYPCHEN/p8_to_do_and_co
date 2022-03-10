@@ -9,7 +9,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Codacy Coverage Reporter
-  uses: codacy/codacy-coverage-reporter-action@v1.3.0
+        uses: codacy/codacy-coverage-reporter-action@v1.3.0
         with:
           project-token: 88333791c9ee4a0ca3877f0249b12f90
           # or
