@@ -1,6 +1,8 @@
 name: codacy-coverage-reporter
 
 on: ["push"]
+- name: Codacy Coverage Reporter
+  uses: codacy/codacy-coverage-reporter-action@v1.3.0
 
 jobs:
   codacy-coverage-reporter:
@@ -14,4 +16,4 @@ jobs:
           project-token:  88333791c9ee4a0ca3877f0249b12f90
           # or
           # api-token: ${{ secrets.CODACY_API_TOKEN }}
-          coverage-reports: cobertura.xml
+          coverage-reports: clover.xml
