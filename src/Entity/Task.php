@@ -117,7 +117,7 @@ class Task
         return $this;
     }
     public function getAuthorName(){
-        $this->getAuthor()!==null?$authorName=$this->getAuthor()->getUserIdentifier():$authorName='anoyme';
+        $this->getAuthor()!==null?$authorName=$this->getAuthor()->getUserIdentifier():$authorName='anonyme';
         return $authorName;
     }
   

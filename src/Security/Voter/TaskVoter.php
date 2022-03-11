@@ -39,14 +39,14 @@ class TaskVoter extends Voter
               if($user===$subject->getAuthor()){
                     return true;
                 }
-               if($subject->getAuthorName()==='anoyme' && $this->security->isGranted('ROLE_ADMIN')){
+               if($subject->getAuthorName()==='anonyme' && $this->security->isGranted('ROLE_ADMIN')){
                     return true;
                 }
             case 'TASK_DELETE':
                 if($user===$subject->getAuthor()){
                     return true;
                 }
-                if($subject->getAuthorName()=='anoyme' && $this->security->isGranted('ROLE_ADMIN')){
+                if($subject->getAuthorName()=='anonyme' && $this->security->isGranted('ROLE_ADMIN')){
                     return true;
                 }
         }

@@ -21,7 +21,7 @@ function testCreateTask(){
     $this->assertEquals("create a task content", $task->getContent());
     $this->assertEquals($date, $task->getCreatedAt());
     $this->assertEquals(0, $task->getIsDone());
-    $this->assertEquals('anoyme', $task->getAuthorName());
+    $this->assertEquals('anonyme', $task->getAuthorName());
 }
 function testCreateTaskWithBlankTitle(){
     $task =new Task;

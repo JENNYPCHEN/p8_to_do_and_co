@@ -79,7 +79,7 @@ class TaskControllerTest extends WebTestCase
         $this->assertSelectorTextContains('.alert', "Oops ! Désolé. Vous n'avez pas le droit d'y accéder.");   
            
     }
-    public function testRoleAdminEditAnoymeTask()
+    public function testRoleAdminEditAnonymeTask()
     {
         $this->loginAUser('admin');
         $taskId=$this->findTaskId(NULL);
@@ -121,7 +121,7 @@ class TaskControllerTest extends WebTestCase
         $this->assertSelectorTextContains('.alert', "Désolé. Vous n'avez pas le droit d'y accéder.");
 
     }
-    public function testRoleAdminEditAnoymeToggle()
+    public function testRoleAdminEditAnonymeToggle()
     {
         $this->loginAUser('admin');
         $taskId=$this->findTaskId(NULL);
@@ -155,7 +155,7 @@ class TaskControllerTest extends WebTestCase
         $this->assertSelectorTextContains('.alert', "Désolé. Vous n'avez pas le droit d'y accéder.");
 
     }
-    public function testTaskAdminDeleteAnoymeTask()
+    public function testTaskAdminDeleteAnonymeTask()
     {
         $this->loginAUser('admin');
         $taskId=$this->findTaskId(NULL);

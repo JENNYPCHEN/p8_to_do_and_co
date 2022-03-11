@@ -54,6 +54,7 @@ class TaskController extends AbstractController
     }
 
     #[Route('/tasks/{id}/edit', name: 'task_edit')]
+    #[IsGranted('ROLE_USER')]
     public function editAction(Task $task, Request $request)
     {
       if (!$this->isGranted('TASK_EDIT', $task)) {
@@ -74,6 +75,7 @@ class TaskController extends AbstractController
     }
 
     #[Route('/tasks/{id}/toggle', name: 'task_toggle')]
+    #[IsGranted('ROLE_USER')]
     public function toggleTaskAction(Task $task)
     {
        if (!$this->IsGranted('TASK_EDIT',$task)) {
