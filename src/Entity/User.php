@@ -44,7 +44,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\Email( message: 'Le format de l\'adresse n\'est pas correcte.')]
     private $email;
 
-    #[ORM\OneToMany(mappedBy: 'author', targetEntity: Task::class)]
+    #[ORM\OneToMany(mappedBy: 'author', targetEntity: Task::class, fetch:"EXTRA_LAZY")]
     private $tasks;
 
     public function __construct()

@@ -30,10 +30,12 @@ class UserController extends AbstractController
     public function listAction(): Response
     {  
        $current_user=$this->getUser()->getRoles();
-       $user_list=$this->userRepository->findOneBy(['username'=>$this->getUser()->getUserIdentifier()]);
        if ($current_user=== ['ROLE_ADMIN']){
         $user_list=$this->userRepository->findAll();
     } 
+       if($current_user=== ['ROLE_USER']) {
+           $user_list=$this->userRepository->findOneBy(['username'=>$this->getUser()->getUserIdentifier()]);
+       }
     
         return $this->render('user/list.html.twig', [
             'controller_name' => 'UserController',
