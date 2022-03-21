@@ -6,10 +6,11 @@
 {% block body %}
     <div class="row">
         {{ form_start(userForm, {'action' : path('user_edit', {'id' : user.id})}) }}
-             {{ form_label(userForm.username) }}
+             <label>Nom d'utilisateur</label>
        {{ form_widget(userForm.username,{'attr':{'class':'form-control'}}) }}
         <span class=" text-danger">{{ form_errors(userForm.username) }}</span>
-       {{ form_row(userForm.email,{'attr':{'class':'form-control'}}) }}
+        <label>Adresse email</label>
+         {{ form_widget(userForm.email,{'attr':{'class':'form-control'}}) }}
       <span class=" text-danger">{{ form_errors(userForm.email) }}</span>
        {{ form_row(userForm.plainPassword.first,{'attr':{'class':'form-control'}}) }}
         <span class=" text-danger">{{ form_errors(userForm.plainPassword) }}</span>

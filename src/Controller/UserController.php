@@ -11,19 +11,25 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Service\UserService;
 use App\Form\UserType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-
-
+use Symfony\Component\Security\Http\Authentication\UserAuthenticatorInterface;
+use Symfony\Component\Security\Http\Authenticator\FormLoginAuthenticator;
 
 class UserController extends AbstractController
 {
 
     protected $userRepository;
     protected $UserService;
+    protected $authenticator;
+    protected $userAuthenticator;
 
-    public function __construct(UserRepository $userRepository, UserService $UserService)
+
+    public function __construct(UserRepository $userRepository, UserService $UserService, FormLoginAuthenticator $authenticator, UserAuthenticatorInterface $userAuthenticator)
     {
         $this->userRepository = $userRepository;
         $this->UserService = $UserService;
+        $this->authenticator=$authenticator;
+        $this->userAuthenticator=$userAuthenticator;
+
     }
     #[Route('/users', name: 'user_list')]
     #[IsGranted("ROLE_USER")]
@@ -49,11 +55,12 @@ class UserController extends AbstractController
         $user = new User();
         $userForm = $this->createForm(UserType::class, $user);
         $userForm->handleRequest($request);
+      
         if ($userForm->isSubmitted() && $userForm->isValid()) {
             $this->UserService->saveUser($userForm->get('plainPassword')->getData(), $user);
-            $this->addFlash('success', "L'utilisateur a bien été ajouté.");
+            $this->userAuthenticator->authenticateUser($user,$this->authenticator, $request );
             return $this->redirectToRoute('user_list');
-        }
+        } 
         return $this->render('user/create.html.twig', [
             'userForm' => $userForm->createView(),
         ]);
