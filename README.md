@@ -6,7 +6,12 @@ Thank you for your interest in this project. I'm delighted to announce that this
 
 Please let me know what you think about this project. I'm always open to improvements!
 
+![project8pic1](https://github.com/JENNYPCHEN/p8_to_do_and_co/blob/main/Picture1.png)
+
 <p align="center">Homepage of the upgraded application (It is a task management application)</p>
+
+![projectpic1](https://github.com/JENNYPCHEN/p8_to_do_and_co/blob/main/Picture2.png)
+<p align="center">API documentation</p>
 
 <p align="center">Homepage after login </p>
 
@@ -16,7 +21,9 @@ Please let me know what you think about this project. I'm always open to improve
 <li>Technical documentation has been created to explain how authentication works in the application <br></li>
 <li>Code audio has been created to analyse the quality of code and the performance <br></li>
 
+
 <h2>Prerequisites</h2>
+
 <li>PHP >=8.0.2<br></li>
 <li>Symfony > 6.0 <br></li>
 <li>Local server, e.g. XAMPP/WAMP for local use.<br></li>
