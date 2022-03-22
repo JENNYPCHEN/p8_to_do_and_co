@@ -46,7 +46,7 @@ $  php ./vendor/bin/phpunit
 
 <h2> Step 5: pull it !</h2>
 <li> It is always a good practise to create <b>branches</b>, which allow you to build new features or test out ideas without putting the main project at risk.
-<li> When you are ready to propose changes to the project,  head on over to the repository on GitHub where your project lives. It would be at  https://www.github.com/ <'your_username'>/p8_to_do_and_co . You'll see a banner indicating that your branch is one commit ahead of <b>JENNYPCHEN:main</b>. Click Contribute and then Open a pull request ( you can of course use Git Bash for sending pull request instead).
+<li> When you are ready to propose changes to the project,  head on over to the repository on GitHub where your project lives. It would be at  https://www.github.com/ <'your_username'>/p8_to_do_and_co . You'll see a banner indicating that your branch is one commit ahead of <b>JENNYPCHEN:main</b>. Click Contribute and then Open a pull request.
 <li> Pull Requests are also an area for discussion. Please do leave a <b>message</b> explain what you have changed when sending a pull request. If I do not merge it / do not reply to any pull requests, please do not feel offended, I may be just too busy for other projects, do give me some time!</li><br>
 
 <h3>Thanks again for your contribution!
