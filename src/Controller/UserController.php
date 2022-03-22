@@ -59,6 +59,7 @@ class UserController extends AbstractController
         if ($userForm->isSubmitted() && $userForm->isValid()) {
             $this->UserService->saveUser($userForm->get('plainPassword')->getData(), $user);
             $this->userAuthenticator->authenticateUser($user,$this->authenticator, $request );
+            $this->addFlash('success', "L'utilisateur a bien été ajouté.");
             return $this->redirectToRoute('user_list');
         } 
         return $this->render('user/create.html.twig', [
