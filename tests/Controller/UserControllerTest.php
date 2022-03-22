@@ -64,6 +64,8 @@ class UserControllerTest extends WebTestCase
         $this->assertResponseRedirects('/users');
         $this->client->followRedirect();
         $this->assertSelectorExists('h1:contains("Liste des utilisateurs")');
+        $this->assertSelectorTextContains('.alert-success', "Superbe ! L'utilisateur a bien été ajouté");
+
     }
     public function testCreateUserTwoDifferentPasswords()
     {
