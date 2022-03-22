@@ -25,7 +25,7 @@ $  git remote -v
 ``` bash
 $ git remote add upstream https://github.com/JENNYPCHEN/p8_to_do_and_co.git
 ```
-<li> You can verify the new upstream repository you've specified for your fork, by type <b>git remote -v</b> again. You should see the URL for your fork as origin, and the URL for the original repository as upstream.
+<li> You can verify the new upstream repository you've specified for your fork, by typing <b>git remote -v</b> again. You should see the URL for your fork as origin, and the URL for the original repository as upstream.
 
 ``` bash
 $  git remote -v
