@@ -164,6 +164,18 @@ class TaskControllerTest extends WebTestCase
         $this->client->followRedirect();
         $this->assertSelectorTextContains('.alert-success', "Superbe ! La tâche a bien été supprimée.");
     }
+    public function testTaskIsDonePage(){
+        $this->loginAUser('user');
+        $this->client->request('GET', '/tasks/isDone'); 
+        $this->assertSelectorTextContains('.btn-success', "Marquer non terminée");
+
+    }
+    public function testTaskIsDonePageWithoutLogin(){
+        $this->client->request('GET', '/tasks/isDone'); 
+        $this->client->followRedirect();
+        $this->assertSelectorTextContains('.alert', "Veuillez vérifier votre nom d'utilisateur/mot de passe.");
+
+    }
     private function loginAUser($username){
         $userRepository = static::getContainer()->get(UserRepository::class);
         $testUser = $userRepository->findOneBy(['username'=> $username]);

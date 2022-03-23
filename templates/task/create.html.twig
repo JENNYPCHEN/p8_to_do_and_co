@@ -9,10 +9,11 @@
        {{ form_widget(form.content,{'attr':{'class':'form-control'}}) }}
        <div class ="row">
        <div class="d-flex justify-content-between my-1">
+       <a href="{{ path('task_list') }}" class="btn btn-primary">Retour à la liste des tâches</a>
         <button type="submit" class="btn btn-success ">Ajouter</button>
         {{ form_end(form) }}
 
-        <a href="{{ path('task_list') }}" class="btn btn-primary">Retour à la liste des tâches</a>
+        
         </div>
         </div>
     </div>
