@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1647952389">
-  <project timestamp="1647952389">
+<coverage generated="1648045363">
+  <project timestamp="1648045363">
     <file name="C:\laragon\www\p8_to_do_and_co\src\Controller\HomepageController.php">
       <class name="App\Controller\HomepageController" namespace="global">
         <metrics complexity="2" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="3" elements="4" coveredelements="4"/>
@@ -15,13 +15,13 @@
       <class name="App\Controller\LoginController" namespace="global">
         <metrics complexity="2" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="5" elements="7" coveredelements="5"/>
       </class>
-      <line num="12" type="method" name="index" visibility="public" complexity="2" crap="2.02" count="4"/>
-      <line num="15" type="stmt" count="4"/>
+      <line num="12" type="method" name="index" visibility="public" complexity="2" crap="2.02" count="5"/>
+      <line num="15" type="stmt" count="5"/>
       <line num="16" type="stmt" count="0"/>
-      <line num="18" type="stmt" count="4"/>
-      <line num="21" type="stmt" count="4"/>
-      <line num="22" type="stmt" count="4"/>
-      <line num="24" type="stmt" count="4"/>
+      <line num="18" type="stmt" count="5"/>
+      <line num="21" type="stmt" count="5"/>
+      <line num="22" type="stmt" count="5"/>
+      <line num="24" type="stmt" count="5"/>
       <metrics loc="27" ncloc="25" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="5" elements="7" coveredelements="5"/>
     </file>
     <file name="C:\laragon\www\p8_to_do_and_co\src\Controller\SecurityController.php">
@@ -32,11 +32,11 @@
     </file>
     <file name="C:\laragon\www\p8_to_do_and_co\src\Controller\TaskController.php">
       <class name="App\Controller\TaskController" namespace="global">
-        <metrics complexity="17" methods="7" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="45" coveredstatements="42" elements="52" coveredelements="48"/>
+        <metrics complexity="17" methods="7" coveredmethods="7" conditionals="0" coveredconditionals="0" statements="45" coveredstatements="45" elements="52" coveredelements="52"/>
       </class>
-      <line num="20" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="12"/>
-      <line num="22" type="stmt" count="12"/>
-      <line num="23" type="stmt" count="12"/>
+      <line num="20" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="13"/>
+      <line num="22" type="stmt" count="13"/>
+      <line num="23" type="stmt" count="13"/>
       <line num="28" type="method" name="listAction" visibility="public" complexity="1" crap="1" count="12"/>
       <line num="32" type="stmt" count="12"/>
       <line num="34" type="stmt" count="12"/>
@@ -82,11 +82,11 @@
       <line num="101" type="stmt" count="2"/>
       <line num="102" type="stmt" count="2"/>
       <line num="103" type="stmt" count="2"/>
-      <line num="106" type="method" name="isDoneTask" visibility="public" complexity="1" crap="2" count="0"/>
-      <line num="110" type="stmt" count="0"/>
-      <line num="112" type="stmt" count="0"/>
-      <line num="113" type="stmt" count="0"/>
-      <metrics loc="116" ncloc="116" classes="1" methods="7" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="45" coveredstatements="42" elements="52" coveredelements="48"/>
+      <line num="106" type="method" name="isDoneTask" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="110" type="stmt" count="1"/>
+      <line num="112" type="stmt" count="1"/>
+      <line num="113" type="stmt" count="1"/>
+      <metrics loc="116" ncloc="116" classes="1" methods="7" coveredmethods="7" conditionals="0" coveredconditionals="0" statements="45" coveredstatements="45" elements="52" coveredelements="52"/>
     </file>
     <file name="C:\laragon\www\p8_to_do_and_co\src\Controller\UserController.php">
       <class name="App\Controller\UserController" namespace="global">
@@ -150,8 +150,8 @@
       <class name="App\Entity\Task" namespace="global">
         <metrics complexity="16" methods="15" coveredmethods="14" conditionals="0" coveredconditionals="0" statements="22" coveredstatements="20" elements="37" coveredelements="34"/>
       </class>
-      <line num="38" type="method" name="getId" visibility="public" complexity="1" crap="1" count="14"/>
-      <line num="40" type="stmt" count="14"/>
+      <line num="38" type="method" name="getId" visibility="public" complexity="1" crap="1" count="15"/>
+      <line num="40" type="stmt" count="15"/>
       <line num="43" type="method" name="getCreatedAt" visibility="public" complexity="1" crap="1" count="3"/>
       <line num="45" type="stmt" count="3"/>
       <line num="48" type="method" name="setCreatedAt" visibility="public" complexity="1" crap="1" count="3"/>
@@ -162,18 +162,18 @@
       <line num="60" type="method" name="setUpdatedAt" visibility="public" complexity="1" crap="1" count="5"/>
       <line num="62" type="stmt" count="5"/>
       <line num="64" type="stmt" count="5"/>
-      <line num="67" type="method" name="getTitle" visibility="public" complexity="1" crap="1" count="13"/>
-      <line num="69" type="stmt" count="13"/>
+      <line num="67" type="method" name="getTitle" visibility="public" complexity="1" crap="1" count="14"/>
+      <line num="69" type="stmt" count="14"/>
       <line num="72" type="method" name="setTitle" visibility="public" complexity="1" crap="1" count="6"/>
       <line num="74" type="stmt" count="6"/>
       <line num="76" type="stmt" count="6"/>
-      <line num="79" type="method" name="getContent" visibility="public" complexity="1" crap="1" count="13"/>
-      <line num="81" type="stmt" count="13"/>
+      <line num="79" type="method" name="getContent" visibility="public" complexity="1" crap="1" count="14"/>
+      <line num="81" type="stmt" count="14"/>
       <line num="84" type="method" name="setContent" visibility="public" complexity="1" crap="1" count="6"/>
       <line num="86" type="stmt" count="6"/>
       <line num="88" type="stmt" count="6"/>
-      <line num="91" type="method" name="getIsDone" visibility="public" complexity="1" crap="1" count="14"/>
-      <line num="93" type="stmt" count="14"/>
+      <line num="91" type="method" name="getIsDone" visibility="public" complexity="1" crap="1" count="15"/>
+      <line num="93" type="stmt" count="15"/>
       <line num="96" type="method" name="setIsDone" visibility="public" complexity="1" crap="2" count="0"/>
       <line num="98" type="stmt" count="0"/>
       <line num="100" type="stmt" count="0"/>
@@ -202,11 +202,11 @@
       <line num="65" type="method" name="setUsername" visibility="public" complexity="1" crap="1" count="13"/>
       <line num="67" type="stmt" count="13"/>
       <line num="69" type="stmt" count="13"/>
-      <line num="77" type="method" name="getUserIdentifier" visibility="public" complexity="1" crap="1" count="21"/>
-      <line num="79" type="stmt" count="21"/>
-      <line num="85" type="method" name="getRoles" visibility="public" complexity="1" crap="1" count="22"/>
-      <line num="87" type="stmt" count="22"/>
-      <line num="90" type="stmt" count="22"/>
+      <line num="77" type="method" name="getUserIdentifier" visibility="public" complexity="1" crap="1" count="22"/>
+      <line num="79" type="stmt" count="22"/>
+      <line num="85" type="method" name="getRoles" visibility="public" complexity="1" crap="1" count="23"/>
+      <line num="87" type="stmt" count="23"/>
+      <line num="90" type="stmt" count="23"/>
       <line num="93" type="method" name="setRoles" visibility="public" complexity="1" crap="1" count="12"/>
       <line num="95" type="stmt" count="12"/>
       <line num="97" type="stmt" count="12"/>
@@ -215,8 +215,8 @@
       <line num="105" type="method" name="setPlainPassword" visibility="public" complexity="1" crap="2" count="0"/>
       <line num="107" type="stmt" count="0"/>
       <line num="109" type="stmt" count="0"/>
-      <line num="115" type="method" name="getPassword" visibility="public" complexity="1" crap="1" count="23"/>
-      <line num="117" type="stmt" count="23"/>
+      <line num="115" type="method" name="getPassword" visibility="public" complexity="1" crap="1" count="24"/>
+      <line num="117" type="stmt" count="24"/>
       <line num="120" type="method" name="setPassword" visibility="public" complexity="1" crap="1" count="13"/>
       <line num="122" type="stmt" count="13"/>
       <line num="124" type="stmt" count="13"/>
@@ -308,10 +308,10 @@
       <class name="App\Security\Voter\TaskVoter" namespace="global">
         <metrics complexity="13" methods="3" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="17" coveredstatements="16" elements="20" coveredelements="18"/>
       </class>
-      <line num="15" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="12"/>
-      <line num="17" type="stmt" count="12"/>
-      <line num="20" type="method" name="supports" visibility="protected" complexity="2" crap="2" count="12"/>
-      <line num="24" type="stmt" count="12"/>
+      <line num="15" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="13"/>
+      <line num="17" type="stmt" count="13"/>
+      <line num="20" type="method" name="supports" visibility="protected" complexity="2" crap="2" count="13"/>
+      <line num="24" type="stmt" count="13"/>
       <line num="28" type="method" name="voteOnAttribute" visibility="protected" complexity="10" crap="10.03" count="9"/>
       <line num="30" type="stmt" count="9"/>
       <line num="32" type="stmt" count="9"/>
@@ -334,8 +334,8 @@
       <class name="App\Service\TaskService" namespace="global">
         <metrics complexity="4" methods="3" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="6" elements="9" coveredelements="9"/>
       </class>
-      <line num="14" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="14"/>
-      <line num="16" type="stmt" count="14"/>
+      <line num="14" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="15"/>
+      <line num="16" type="stmt" count="15"/>
       <line num="18" type="method" name="saveTask" visibility="public" complexity="2" crap="2" count="7"/>
       <line num="20" type="stmt" count="7"/>
       <line num="21" type="stmt" count="7"/>
@@ -359,6 +359,6 @@
       <line num="30" type="stmt" count="3"/>
       <metrics loc="34" ncloc="34" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="6" elements="8" coveredelements="8"/>
     </file>
-    <metrics files="17" loc="1069" ncloc="964" classes="11" methods="57" coveredmethods="49" conditionals="0" coveredconditionals="0" statements="199" coveredstatements="181" elements="256" coveredelements="230"/>
+    <metrics files="17" loc="1069" ncloc="964" classes="11" methods="57" coveredmethods="50" conditionals="0" coveredconditionals="0" statements="199" coveredstatements="184" elements="256" coveredelements="234"/>
   </project>
 </coverage>
