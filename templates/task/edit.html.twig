@@ -5,8 +5,14 @@
         {{ form_start(form, {'action' : path('task_edit', { 'id' : task.id })}) }}
                {{ form_label(form.title) }}
        {{ form_widget(form.title,{'attr':{'class':'form-control'}}) }}
+         <div class="form-error text-danger">
+        {{ form_errors(form.title) }}
+    </div>
           {{ form_label(form.content) }}
        {{ form_widget(form.content,{'attr':{'class':'form-control'}}) }}
+         <div class="form-error text-danger">
+        {{ form_errors(form.content) }}
+    </div>
        <div class ="row">
        <div class="d-flex justify-content-end my-1">
         <button type="submit" class="btn btn-success float-end">Modifier</button>
