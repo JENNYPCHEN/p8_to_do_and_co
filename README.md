@@ -11,7 +11,6 @@ Please let me know what you think about this project. I'm always open to improve
 <p align="center">Homepage of the upgraded application (It is a task management application)</p>
 
 ![projectpic1](https://github.com/JENNYPCHEN/p8_to_do_and_co/blob/main/Picture2.png)
-<p align="center">API documentation</p>
 
 <p align="center">Homepage after login </p>
 
